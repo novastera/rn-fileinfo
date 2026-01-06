@@ -3,10 +3,10 @@ name: CI and Publish
 on:
   push:
     branches: [ main, develop ]
+    tags:
+      - '*.*.*'
   pull_request:
     branches: [ main ]
-  release:
-    types: [published]
 
 jobs:
   build:
@@ -79,10 +79,31 @@ jobs:
 
   publish:
     name: Publish to NPM
-    if: github.event_name == 'release' && github.event.action == 'published'
+    if: |
+      startsWith(github.ref, 'refs/tags/') &&
+      contains(github.ref, '.')
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Extract Version from Tag
+        id: version
+        run: |
+          if [[ "${{ github.ref }}" =~ ^refs/tags/(.*)$ ]]; then
+            VERSION="${BASH_REMATCH[1]}"
+            # Remove 'v' prefix if present
+            VERSION="${VERSION#v}"
+            # Validate semver format (x.y.z)
+            if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+              echo "❌ Invalid semver format: $VERSION"
+              exit 1
+            fi
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+            echo "✅ Extracted version: $VERSION"
+          else
+            echo "❌ Not a tag ref: ${{ github.ref }}"
+            exit 1
+          fi
+
       - name: Download Build Artifacts
         uses: actions/download-artifact@v7
         with:
@@ -98,15 +119,9 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Verify npm availability
-        run: |
-          echo "Node.js version: $(node --version)"
-          echo "npm version: $(npm --version)"
-
       - name: Update Version
         run: |
-          VERSION="${{ github.event.release.tag_name }}"
-          VERSION="${VERSION#v}"  # Remove 'v' prefix
+          VERSION="${{ steps.version.outputs.version }}"
           echo "Publishing version: $VERSION"
           
           # Update package.json version directly
@@ -115,12 +130,6 @@ jobs:
             pkg.version = '$VERSION';
             require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
           "
-          
-          # Update version in built artifacts
-          if [ -f "lib/module/package.json" ]; then
-            sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$VERSION\"/g" lib/module/package.json
-          fi
-          
           
           echo "✅ Version updated to $VERSION"
 
