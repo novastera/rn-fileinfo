@@ -14,21 +14,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
-
-      - name: Enable Corepack
-        run: corepack enable
+          node-version: '24'
 
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: npm ci
 
       - name: Build Package
-        run: yarn prepare
+        run: npm run prepare
 
       - name: Verify Build Output
         run: |
@@ -74,7 +71,7 @@ jobs:
           echo "✅ Build verification passed"
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: package-artifacts
           path: .
@@ -87,28 +84,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: package-artifacts
           path: .
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Enable Corepack
-        run: corepack enable
-
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: npm ci
 
       - name: Verify npm availability
         run: |
           echo "Node.js version: $(node --version)"
           echo "npm version: $(npm --version)"
-          echo "yarn version: $(yarn --version)"
 
       - name: Update Version
         run: |
@@ -132,6 +125,8 @@ jobs:
           echo "✅ Version updated to $VERSION"
 
       - name: Publish to NPM
-        run: npm publish --access public
+        run: |
+          export PATH="$PATH:$(pwd)/node_modules/.bin"
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET }} 

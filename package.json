@@ -1,7 +1,7 @@
 {
   "name": "@novastera-oss/rn-fileinfo",
   "version": "0.2.0",
-  "description": "Lightweight React Native TurboModule for safe and efficient file metadata access on iOS and Android",
+  "description": "Lightweight React Native TurboModule for safe and efficient file metadata access on iOS and Android. Part of Novastera's open-source ecosystem - a modern CRM/ERP SaaS platform.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/index.d.ts",
   "exports": {
@@ -41,7 +41,7 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "build:expo-plugin": "cd plugin && npm run build",
-    "prepare": "bob build && yarn build:expo-plugin",
+    "prepare": "bob build && npm run build:expo-plugin",
     "release": "release-it --only-version"
   },
   "keywords": [
@@ -52,18 +52,24 @@
     "file-metadata",
     "filesystem",
     "turbo-module",
-    "expo"
+    "expo",
+    "novastera",
+    "crm",
+    "erp",
+    "saas",
+    "document-management",
+    "mobile-first"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DarkSorrow/rn-fileinfo.git"
+    "url": "git+https://github.com/novastera/rn-fileinfo.git"
   },
-  "author": "DarkSorrow <contact@novastera.com> (https://novastera.com)",
+  "author": "Hassan <hassan@novastera.com> (https://novastera.com)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/DarkSorrow/rn-fileinfo/issues"
+    "url": "https://github.com/novastera/rn-fileinfo/issues"
   },
-  "homepage": "https://github.com/DarkSorrow/rn-fileinfo#readme",
+  "homepage": "https://github.com/novastera/rn-fileinfo#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

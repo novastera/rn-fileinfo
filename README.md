@@ -277,6 +277,22 @@ Check if a path is a directory.
 
 **Note**: Due to platform limitations, Android doesn't provide file creation time. The module provides the best available data for each platform while maintaining a consistent API.
 
+## About Novastera
+
+**@novastera-oss/rn-fileinfo** is part of the **Novastera** open-source ecosystem, a modern CRM/ERP SaaS platform designed for the next generation of business applications. Novastera combines cutting-edge file management solutions with comprehensive business management tools, enabling organizations to efficiently handle file metadata and document management in their mobile applications.
+
+### Key Features of Novastera Platform
+
+- **Modern CRM/ERP System**: Comprehensive business management with AI-powered insights and real-time collaboration
+- **Efficient File Management**: Enterprise-grade file metadata handling for document management and media processing
+- **Mobile-First**: Native iOS and Android applications built with React Native and Turbo Modules
+- **Open Source**: Part of Novastera's commitment to open-source innovation and developer-friendly solutions
+- **Privacy-Focused**: On-device AI capabilities with no data leaving user devices
+
+This library is currently being used in [Novastera's](https://novastera.com) mobile application, demonstrating its capabilities in production environments. We're committed to providing modern, efficient file metadata solutions that handle large files safely and performantly, helping developers build applications with reliable file information access without memory overhead.
+
+Learn more about Novastera: [https://novastera.com/resources](https://novastera.com/resources)
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
