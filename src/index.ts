@@ -10,3 +10,6 @@ export const getDirectoryInfo = RnFileinfo.getDirectoryInfo;
 export const exists = RnFileinfo.exists;
 export const isFile = RnFileinfo.isFile;
 export const isDirectory = RnFileinfo.isDirectory;
+
+// Export download manager APIs
+export * from './download';
