@@ -10,24 +10,24 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "react": "19.0.0",
-    "react-native": "0.79.2",
+    "react": "^19.0.0",
+    "react-native": "^0.79.2",
     "@novastera-oss/rn-fileinfo": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
     "@babel/runtime": "^7.28.0",
-    "@react-native/babel-preset": "0.79.2",
+    "@react-native/babel-preset": "^0.79.2",
     "@react-native/eslint-config": "^0.78.0",
-    "@react-native/metro-config": "0.79.2",
+    "@react-native/metro-config": "^0.79.2",
     "@types/react": "^19.0.0",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^30.1.0",
     "eslint": "^9.31.0",
     "jest": "^30.1.0",
     "prettier": "^3.0.3",
-    "react-test-renderer": "19.0.0",
+    "react-test-renderer": "^19.0.0",
     "typescript": "^5.8.3"
   },
   "jest": {
