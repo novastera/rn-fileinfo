@@ -603,9 +603,9 @@ RCT_EXPORT_MODULE()
     return;
   }
 
-  __weak typeof(self) weakSelf = self;
+  __weak __typeof(self) weakSelf = self;
   [task.nativeTask cancelByProducingResumeData:^(NSData *resumeData) {
-    __strong typeof(weakSelf) strongSelf = weakSelf;
+    __strong __typeof(weakSelf) strongSelf = weakSelf;
     if (!strongSelf) return;
 
     NSString *encoded = [resumeData base64EncodedStringWithOptions:0] ?: @"";
