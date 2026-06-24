@@ -313,7 +313,7 @@ class RnFileinfoModule(private val reactContext: ReactApplicationContext) : Nati
             val searchDirs = listOfNotNull(
                 reactContext.filesDir,
                 reactContext.cacheDir,
-                reactContext.externalFilesDir(null),
+                reactContext.getExternalFilesDir(null),
             )
 
             for (dir in searchDirs) {
